@@ -1,8 +1,11 @@
 {
   "name": "template_nodeJS",
   "version": "1.0.0",
-  "description": "Basic Node.JS base template - Bootstrap, cssUA, Express, Gulp, jQuery, Sass",
+  "description": "Offical website for the band Nervous Monks",
   "main": "server.js",
+  "engines": {
+    "node": "8.9.1"
+  },
   "dependencies": {
     "body-parser": "^1.18.2",
     "compression": "^1.7.2",
