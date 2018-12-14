@@ -5,17 +5,28 @@ const exphbs  = require('express-handlebars');
 const bodyParser = require("body-parser");
 const compression = require('compression');
 const path = require("path");
+const mongoose = require("mongoose");
 
 // Check for production
 // =============================================================
 const production = process.env.NODE_ENV == "production" ? true : false;
+
+// Require all models
+// =============================================================
+var db = require("./models");
 
 // Sets up the Express App
 // =============================================================
 const app = express();
 let PORT = process.env.PORT || 3000;
 
+// Sets up the Express with Handlebars
+// =============================================================
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
 // Sets up the Express app to handle data parsing
+// =============================================================
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -25,7 +36,8 @@ app.use(bodyParser.json({
   type: "application/vnd.api+json"
 }));
 
-//apply production settings
+//Establish if in production
+// =============================================================
 if (production) {
     // compress responses
     app.use(compression());
@@ -35,6 +47,15 @@ if (production) {
     // permit access to public file
     app.use(express.static(path.join(__dirname, '/public')))
 };
+
+// Set mongoose to leverage built in JavaScript ES6 Promises
+// Connect to the Mongo DB
+// =============================================================
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/shows";
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true
+});
 
 // Import Routes
 // =============================================================
