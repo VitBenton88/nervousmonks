@@ -7,7 +7,7 @@ const db = require("../models");
 module.exports = function(app) {
     // homepage route
     app.get("/", (req, res) => {
-        db.Shows.find({date: { $gte: Date.now() }}).then(function(shows) {
+        db.Shows.find({date: { "$gte": Date.now() }}).then(function(shows) {
           // results are available to us inside the .then
           res.render("index", {shows});
         });
@@ -15,7 +15,7 @@ module.exports = function(app) {
 
     // redirect any route to homepage
     app.get("/*", (req, res) => {
-      db.Shows.find({date: { $gte: Date.now() }}).then(function(shows) {
+      db.Shows.find({date: { "$gte": Date.now() }}).then(function(shows) {
           // results are available to us inside the .then
           res.render("index", {shows});
         });
