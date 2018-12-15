@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 const compression = require('compression');
 const path = require("path");
 const mongoose = require("mongoose");
+const basicAuth = require('express-basic-auth');
+const db = require("../models");
+const dotenv = require('dotenv');
 
 // Check for production
 // =============================================================
@@ -44,6 +47,9 @@ if (production) {
     // permit access to public file
     app.use(express.static(path.join(__dirname, '/public'), {maxage: '1y'}));
 } else {
+    //load environment variables
+    dotenv.config();
+
     // permit access to public file
     app.use(express.static(path.join(__dirname, '/public')))
 };
@@ -59,7 +65,7 @@ mongoose.connect(MONGODB_URI, {
 
 // Import Routes
 // =============================================================
-require("./routes/routes.js")(app);
+require("./routes/routes.js")(app, basicAuth, db, dotenv);
 
 // Starts the server to begin listening
 // =============================================================

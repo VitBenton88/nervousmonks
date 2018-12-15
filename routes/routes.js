@@ -1,11 +1,6 @@
-// Dependencies
-// =============================================================
-const basicAuth = require('express-basic-auth');
-const db = require("../models");
-
 // Routes
 // =============================================================
-module.exports = function(app) {
+module.exports = function(app, basicAuth, db, dotenv) {
     // GET
     // =============================================================
     // homepage
@@ -16,7 +11,7 @@ module.exports = function(app) {
       });
 
     // admin
-    app.get("/admin_007", basicAuth({users: { 'admin': '#WJKc70r78c5PR&l' }, challenge: true}), (req, res) => {
+    app.get("/admin_007", basicAuth({users: { 'admin': process.env.ADMIN_PASS }, challenge: true}), (req, res) => {
       db.Shows.find({date: { "$gte": 946684800000 }}).then(function(shows) {
         res.render("admin", {shows});
       });
