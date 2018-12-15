@@ -73,7 +73,7 @@ gulp.task('sass-development', () => {
     .pipe(livereload());
 });
 
-//// PRODUCTION gulp.tasks/ ///
+//// PRODUCTION gulp.tasks/ ////
 
 // combine css libraries - PRODUCTION
 gulp.task('libraries-css-production', (cb) => {

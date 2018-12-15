@@ -5,19 +5,27 @@ const db = require("../models");
 // Routes
 // =============================================================
 module.exports = function(app) {
-    // homepage route
+    // homepage
     app.get("/", (req, res) => {
         db.Shows.find({date: { "$gte": Date.now() }}).then(function(shows) {
           // results are available to us inside the .then
-          res.render("index", {shows});
+          res.render("shows", {shows});
         });
       });
 
+    // admin
+    app.get("/admin_007", (req, res) => {
+      db.Shows.find({date: { "$gte": Date.now() }}).then(function(shows) {
+        // results are available to us inside the .then
+        res.render("shows", {layout: "admin", shows});
+      });
+    });
+
     // redirect any route to homepage
     app.get("/*", (req, res) => {
-      db.Shows.find({date: { "$gte": Date.now() }}).then(function(shows) {
+      db.Shows.find({date: { "$gte": 946684800000 }}).then(function(shows) {
           // results are available to us inside the .then
-          res.render("index", {shows});
+          res.status(404).render("shows", {shows});
         });
       });
 
