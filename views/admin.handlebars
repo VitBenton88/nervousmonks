@@ -3,10 +3,10 @@
 
     <section class="container admin-form">
          <form>
-            <input type="text" class="form-control" id="show-location" placeholder="Location">
-            <input type="date" class="form-control" id="show-date" placeholder="Date">
-            <input type="url" class="form-control" id="show-link" placeholder="Link">
-            <button type="submit" class="btn btn-light btn-lg submit-show">Submit</button>
+            <input type="text" id="show-location" placeholder="Location">
+            <input type="date" id="show-date" placeholder="Date">
+            <input type="url" id="show-link" placeholder="Link">
+            <button type="submit" class="button submit-show">Submit</button>
         </form>
     </section>
 
@@ -21,7 +21,7 @@
                         <li><p><a href="{{this.link}}" target="_blank"> More Info</a></p></li>
                     </ul>
                     <aside class="toolbar">
-                        <button type="button" data-id="{{this.id}}" class="button btn-edit">Edit</button>
+                        <button type="button" data-id="{{this.id}}" class="button edit">Edit</button>
                         <button type="button" data-id="{{this.id}}" class="button delete">Delete</button>
                     </aside>
                 </div>

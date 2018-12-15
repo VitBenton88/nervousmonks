@@ -2,12 +2,26 @@
     background: $white;
     text-align: center;
 
-    .admin-form{
+    .admin-form {
         margin: 50px auto;
 
-        .form-group {
+        input {
             margin: 20px auto;
             max-width: 700px;
+        }
+
+        button.submit-show {
+            background: $turquoise;
+        }
+    }
+
+    .shows {
+        button.edit {
+            background: $lightyellow;
+        }
+
+        button.delete {
+            background: $coral;
         }
     }
 }

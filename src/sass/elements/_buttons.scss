@@ -1,13 +1,33 @@
-/* Regular Buttons */
-.button, input[type="button"], input[type="submit"] {
-    user-select: none;
-}
-
-input[type="button"], input[type="submit"] {
-    appearance: none !important;
-    border: 0;
-}
-
 input, button {
     font-family: $questrial;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+input {
+    display: block;
+    margin: 0 auto;
+    padding: 15px;
+    width: 100%;
+}
+
+button.button {
+    border-radius: 0%;
+    border: 1px solid $black;
+    cursor: pointer;
+    opacity: 1;
+    outline: none;
+    padding: 10px 30px;
+    user-select: none;
+    text-transform: uppercase;
+    transition: $transition-opacity;
+
+    &:hover {
+        opacity: 0.5;
+    }
+
+    &:active { 
+        background-color: none;
+        border: none;
+      }
 }
