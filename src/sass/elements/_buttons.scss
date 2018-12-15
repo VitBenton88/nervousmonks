@@ -3,7 +3,11 @@
     user-select: none;
 }
 
-    input[type="button"], input[type="submit"] {
-        appearance: none !important;
-        border: 0;
-    }
+input[type="button"], input[type="submit"] {
+    appearance: none !important;
+    border: 0;
+}
+
+input, button {
+    font-family: $questrial;
+}

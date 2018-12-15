@@ -13,9 +13,12 @@
 @import "elements/headings";
 
 /* COMPONENTS */
-@import "components/admin";
-@import "components/main";
 @import "components/shows";
+@import "components/social";
 
 /* BROWSERS */
 @import "core/browsers";
+
+/* PAGES */
+@import "pages/admin";
+@import "pages/home";

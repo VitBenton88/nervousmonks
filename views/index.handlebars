@@ -1,0 +1,29 @@
+<section id="home">
+    <nav class="container">
+        <h1>Nervous Monks</h1>
+        <ul class="social">
+            <li><a href="https://www.facebook.com/nervousmonks/" target="_blank"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/nervousmonks/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://soundcloud.com/nervousmonks" target="_blank"><i class="fab fa-soundcloud"></i></a></li>
+            <li><a href="https://nervousmonks.bandcamp.com/releases" target="_blank"><i class="fab fa-bandcamp"></i></a></li>
+        </ul>
+        <h2 class="contact"><a href="mailto:nervousmonks@gmail.com">Contact</a></h2>
+    </nav>
+
+    <section class="container shows">
+        <h2>Shows</h2>
+        {{#if shows}}
+            {{#each shows}}
+                <div class="col-12 col-md-4 show">
+                    <ul class="details">
+                        <li><p>{{this.location}}</p></li>
+                        <li><p><time datetime="{{this.date}}">{{this.date}}</time></p></li>
+                        <li><p><a href="{{this.link}}" target="_blank"> More Info</a></p></li>
+                    </ul>
+                </div>
+            {{/each}}
+        {{else}}
+            <h5>No Shows Currently Scheduled</h5>
+        {{/if}}
+    </section>
+</section>

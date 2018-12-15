@@ -1,0 +1,33 @@
+<section id="admin">
+    <h1>Welcome to the admin you fuck!</h1>
+
+    <section class="container admin-form">
+         <form>
+            <input type="text" class="form-control" id="show-location" placeholder="Location">
+            <input type="date" class="form-control" id="show-date" placeholder="Date">
+            <input type="url" class="form-control" id="show-link" placeholder="Link">
+            <button type="submit" class="btn btn-light btn-lg submit-show">Submit</button>
+        </form>
+    </section>
+
+    <section class="container shows">
+        <h2>Shows</h2>
+        {{#if shows}}
+            {{#each shows}}
+                <div class="col-12 col-md-4 show">
+                    <ul class="details">
+                        <li><p>{{this.location}}</p></li>
+                        <li><p><time datetime="{{this.date}}">{{this.date}}</time></p></li>
+                        <li><p><a href="{{this.link}}" target="_blank"> More Info</a></p></li>
+                    </ul>
+                    <aside class="toolbar">
+                        <button type="button" data-id="{{this.id}}" class="button btn-edit">Edit</button>
+                        <button type="button" data-id="{{this.id}}" class="button delete">Delete</button>
+                    </aside>
+                </div>
+            {{/each}}
+        {{else}}
+            <h5>No Shows Currently Scheduled</h5>
+        {{/if}}
+    </section>
+</section>
