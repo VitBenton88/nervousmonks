@@ -7,7 +7,6 @@ const compression = require('compression');
 const path = require("path");
 const mongoose = require("mongoose");
 const basicAuth = require('express-basic-auth');
-const db = require("../models");
 const dotenv = require('dotenv');
 
 // Check for production
@@ -16,7 +15,7 @@ const production = process.env.NODE_ENV == "production" ? true : false;
 
 // Require all models
 // =============================================================
-var db = require("./models");
+const db = require("./models");
 
 // Sets up the Express App
 // =============================================================
