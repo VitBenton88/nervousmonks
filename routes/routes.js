@@ -1,5 +1,6 @@
 // Dependencies
 // =============================================================
+const basicAuth = require('express-basic-auth');
 const db = require("../models");
 
 // Routes
@@ -14,7 +15,7 @@ module.exports = function(app) {
       });
 
     // admin
-    app.get("/admin_007", (req, res) => {
+    app.get("/admin_007", basicAuth({users: { 'admin': '#WJKc70r78c5PR&l' }, challenge: true}), (req, res) => {
       db.Shows.find({date: { "$gte": Date.now() }}).then(function(shows) {
         // results are available to us inside the .then
         res.render("shows", {layout: "admin", shows});
