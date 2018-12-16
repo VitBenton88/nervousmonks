@@ -3,9 +3,9 @@ $('form.add .submit-show').click(() => {
     event.preventDefault();
 
     //capture form values
-    const location = $('form.active #show-location').val().trim();
-    const date = $('form.active #show-date').val().trim();
-    const link = $('form.active #show-link').val().trim();
+    const location = $('form.add #show-location').val().trim();
+    const date = $('form.add #show-date').val().trim();
+    const link = $('form.add #show-link').val().trim();
 
     let newShow = {
         location,
@@ -55,8 +55,6 @@ $('.toolbar .button.edit').click( function() {
         date: $(this).data('date'),
         link: $(this).data('link')
     }
-
-    console.log(currentShow);
 
     $('form.update .submit-show').attr('data-id', currentShow.id);
     $('#edit-modal .modal-content .location').html(currentShow.location);
