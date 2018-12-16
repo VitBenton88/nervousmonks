@@ -80,7 +80,7 @@ module.exports = function(app, basicAuth, db) {
 
   // delete show
   app.post("/deleteshow", (req, res) => {
-    var showId = req.body.showId;
+    const showId = req.body.showId;
 
     db.Shows
       .deleteOne({_id: showId})
@@ -96,18 +96,20 @@ module.exports = function(app, basicAuth, db) {
 
   // update show
   app.post("/updateshow", (req, res) => {
-    var showId = req.body.id;
+    const _id = req.body.id;
+    const { location } = req.body;
+    const { date } = req.body;
+    const { link } = req.body;
 
-  //   db.Shows
-  //     .deleteOne({_id: showId})
-  //     .then((result) => {
-  //       res.send(true);
-  //     })
-  //     .catch((err) => {
-  //     // If an error occurred, send it to the client
-  //     console.log(err);
-  //     res.send(false);
-  //   });
-  // });
+    db.Shows
+      .updateOne({_id},{location, date, link})
+      .then((result) => {
+        res.send(true);
+      })
+      .catch((err) => {
+      // If an error occurred, send it to the client
+      console.log(err);
+      res.send(false);
+    });
   });
 };
