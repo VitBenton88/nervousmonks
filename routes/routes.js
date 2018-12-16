@@ -93,4 +93,21 @@ module.exports = function(app, basicAuth, db) {
       res.send(false);
     });
   });
+
+  // update show
+  app.post("/updateshow", (req, res) => {
+    var showId = req.body.id;
+
+  //   db.Shows
+  //     .deleteOne({_id: showId})
+  //     .then((result) => {
+  //       res.send(true);
+  //     })
+  //     .catch((err) => {
+  //     // If an error occurred, send it to the client
+  //     console.log(err);
+  //     res.send(false);
+  //   });
+  // });
+  });
 };

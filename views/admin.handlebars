@@ -1,17 +1,27 @@
 <section id="admin">
     <h1>Welcome to the admin you fuck!</h1>
 
-    <section class="container admin-form">
-         <form>
-            <input type="text" id="show-location" placeholder="Location">
-            <input type="date" id="show-date" placeholder="Date">
-            <input type="url" id="show-link" placeholder="Link">
-            <button type="submit" class="button submit-show">Submit</button>
-        </form>
-    </section>
+    {{> form modal=false}}
 
     <section class="container shows">
         <h2>Shows</h2>
         {{> shows}}
     </section>
+
+<!-- Edit Modal -->
+<div id="edit-modal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <i class="far fa-times-circle close"></i>
+    <ul class="details">
+        <p class="title">Current Details:</p>
+        <li class="location"></li>
+        <li class="date"></li>
+        <li class="link"></li>
+    </ul>
+    {{> form modal=true}}
+  </div>
+
+</div>
 </section>

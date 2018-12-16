@@ -1,0 +1,8 @@
+<section class="container admin-form">
+    <form class="{{#if this.modal}}update{{else}}add{{/if}}">
+        <input type="text" id="show-location" placeholder="Location">
+        <input type="date" id="show-date" placeholder="Date">
+        <input type="url" id="show-link" placeholder="Link">
+        <button type="submit" class="button submit-show" {{#if this.modal}}data-id=""{{/if}}>{{#if this.modal}}Update{{else}}Submit{{/if}}</button>
+    </form>
+</section>
