@@ -1,26 +1,52 @@
+// Helper functions
+// =============================================================
+const showArrFormatter = (shows, admin) => {
+  let showsArr = [];
+
+  for (let i = 0; i < shows.length; i++) { 
+    const { id } = shows[i];
+    const { location } = shows[i];
+    const { date } = shows[i];
+    const { link } = shows[i];
+
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+    const dateToPrint = date.toLocaleDateString("en-US", options)
+    
+    const currentShowObjFormatted = {id, location, date, dateToPrint, link, admin}
+
+    showsArr.push(currentShowObjFormatted);
+  }
+
+  return showsArr;
+}
+
 // Routes
 // =============================================================
-module.exports = function(app, basicAuth, db, dotenv) {
+module.exports = function(app, basicAuth, db) {
     // GET
     // =============================================================
     // homepage
     app.get("/", (req, res) => {
         db.Shows.find({date: { "$gte": Date.now() }}).then(function(shows) {
-          res.render("index", {shows});
+          const showsArr = showArrFormatter(shows, false);
+          res.render("index", {showsArr});
         });
-      });
+    });
 
     // admin
     app.get("/admin_007", basicAuth({users: { 'admin': process.env.ADMIN_PASS }, challenge: true}), (req, res) => {
       db.Shows.find({date: { "$gte": 946684800000 }}).then(function(shows) {
-        res.render("admin", {shows});
+        const showsArr = showArrFormatter(shows, true);
+        res.render("admin", {showsArr});
       });
     });
 
     // redirect any route to homepage
     app.get("/*", (req, res) => {
       db.Shows.find({date: { "$gte": Date.now() }}).then(function(shows) {
-          res.status(404).render("index", {shows});
+        const showsArr = showArrFormatter(shows, false);
+          res.status(404).render("index", {showsArr});
         });
       });
 

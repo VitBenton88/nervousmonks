@@ -64,7 +64,7 @@ mongoose.connect(MONGODB_URI, {
 
 // Import Routes
 // =============================================================
-require("./routes/routes.js")(app, basicAuth, db, dotenv);
+require("./routes/routes.js")(app, basicAuth, db);
 
 // Starts the server to begin listening
 // =============================================================

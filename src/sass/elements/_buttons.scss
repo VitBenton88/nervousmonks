@@ -21,7 +21,7 @@ button.button {
     user-select: none;
     text-transform: uppercase;
     transition: $transition-opacity;
-
+    
     &:hover {
         opacity: 0.5;
     }

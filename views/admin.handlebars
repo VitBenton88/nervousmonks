@@ -12,22 +12,6 @@
 
     <section class="container shows">
         <h2>Shows</h2>
-        {{#if shows}}
-            {{#each shows}}
-                <div class="col-12 col-md-4 show">
-                    <ul class="details">
-                        <li><p>{{this.location}}</p></li>
-                        <li><p><time datetime="{{this.date}}">{{this.date}}</time></p></li>
-                        <li><p><a href="{{this.link}}" target="_blank"> More Info</a></p></li>
-                    </ul>
-                    <aside class="toolbar">
-                        <button type="button" data-id="{{this.id}}" class="button edit">Edit</button>
-                        <button type="button" data-id="{{this.id}}" class="button delete">Delete</button>
-                    </aside>
-                </div>
-            {{/each}}
-        {{else}}
-            <p>No Shows Currently Scheduled</p>
-        {{/if}}
+        {{> shows}}
     </section>
 </section>
