@@ -1,6 +1,7 @@
 {{#if showsArr}}
     {{#each showsArr}}
         <div class="col-12 col-md-4 show">
+            <hr>
             <ul class="details">
                 <li><p>{{this.location}}</p></li>
                 <li><p><time datetime="{{this.date}}">{{this.dateToPrint}}</time></p></li>
@@ -12,7 +13,6 @@
                     <button type="button" data-id="{{this.id}}" class="button delete">Delete</button>
                 </aside>
             {{/if}}
-            <hr>
         </div>
     {{/each}}
 {{else}}
