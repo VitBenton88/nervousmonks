@@ -1,4 +1,5 @@
 <section class="container admin-form">
+    <p>{{#if this.modal}}Update Show{{else}}Add Show{{/if}}</p>
     <form class="{{#if this.modal}}update{{else}}add{{/if}}">
         <input type="text" id="show-location" placeholder="Location">
         <input type="date" id="show-date" placeholder="Date">
