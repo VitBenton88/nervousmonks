@@ -1,20 +1,20 @@
 {{#if showsArr}}
 {{#each showsArr}}
-    <div class="col-12 col-md-4 show">
-        <hr>
-        <ul class="details">
-            <li><p>{{this.location}}</p></li>
-            <li><p><time datetime="{{this.date}}">{{this.dateToPrint}}</time></p></li>
-            <li><p><a href="{{this.link}}" target="_blank"> More Info</a></p></li>
-        </ul>
-        {{#if this.admin}}
-            <aside class="toolbar">
-                <button type="button" data-id="{{this.id}}" class="button edit">Edit</button>
-                <button type="button" data-id="{{this.id}}" class="button delete">Delete</button>
-            </aside>
-        {{/if}}
-    </div>
+<div class="col-12 col-md-4 show">
+    <hr>
+    <ul class="details">
+        <li>{{this.location}}</li>
+        <li><time datetime="{{this.date}}">{{this.dateToPrint}}</time></li>
+        <li><a href="{{this.link}}" target="_blank"> More Info</a></li>
+    </ul>
+    {{#if this.admin}}
+    <aside class="toolbar">
+        <button type="button" data-id="{{this.id}}" class="button edit">Edit</button>
+        <button type="button" data-id="{{this.id}}" class="button delete">Delete</button>
+    </aside>
+    {{/if}}
+</div>
 {{/each}}
 {{else}}
-    <p>No Shows Currently Scheduled</p>
+<p>No Shows Currently Scheduled</p>
 {{/if}}
