@@ -24,16 +24,6 @@ const showArrFormatter = (shows, admin) => {
 // Routes
 // =============================================================
 module.exports = function(app, basicAuth, db) {
-    // GET
-    // =============================================================
-    // homepage
-    app.get("/", (req, res) => {
-        db.Shows.find({date: { "$gte": Date.now() }}).then(function(shows) {
-          const showsArr = showArrFormatter(shows, false);
-          res.render("index", {showsArr});
-        });
-    });
-
     // admin
     app.get("/admin_007", basicAuth({users: { 'admin': process.env.ADMIN_PASS }, challenge: true}), (req, res) => {
       db.Shows.find({date: { "$gte": 946684800000 }}).then(function(shows) {
@@ -42,13 +32,17 @@ module.exports = function(app, basicAuth, db) {
       });
     });
 
-    // redirect any route to homepage
-    app.get("/*", (req, res) => {
-      db.Shows.find({date: { "$gte": Date.now() }}).then(function(shows) {
-        const showsArr = showArrFormatter(shows, false);
-          res.status(404).render("index", {showsArr});
+    // GET
+    // =============================================================
+    // homepage and all other routes
+    app.get(["/", "*"], (req, res) => {
+      const date = new Date();
+      const yesterdaysDate = date.setDate(date.getDate() - 1);
+        db.Shows.find({date: { "$gte": yesterdaysDate }}).then(function(shows) {
+          const showsArr = showArrFormatter(shows, false);
+          res.render("index", {showsArr});
         });
-      });
+    });
 
     //handle Googles robots
     app.get('/robots.txt', (req, res) => {
