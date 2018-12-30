@@ -74,10 +74,10 @@ module.exports = function(app, basicAuth, db) {
 
   // delete show
   app.post("/deleteshow", (req, res) => {
-    const showId = req.body.showId;
+    const _id = req.body.showId;
 
     db.Shows
-      .deleteOne({_id: showId})
+      .deleteOne({_id})
       .then((result) => {
         res.send(true);
       })
