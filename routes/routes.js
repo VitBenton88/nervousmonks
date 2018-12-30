@@ -24,6 +24,8 @@ const showArrFormatter = (shows, admin) => {
 // Routes
 // =============================================================
 module.exports = function(app, basicAuth, db) {
+    // GET
+    // =============================================================
     // admin
     app.get("/admin_007", basicAuth({users: { 'admin': process.env.ADMIN_PASS }, challenge: true}), (req, res) => {
       db.Shows.find({date: { "$gte": 946684800000 }}).then(function(shows) {
@@ -32,8 +34,6 @@ module.exports = function(app, basicAuth, db) {
       });
     });
 
-    // GET
-    // =============================================================
     // homepage and all other routes
     app.get(["/", "*"], (req, res) => {
       const date = new Date();
