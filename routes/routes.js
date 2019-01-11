@@ -22,6 +22,7 @@ module.exports = (app, basicAuth, db, validator) => {
       .catch((error) => {
           // If an error occurred, send it to the client
           console.log(error);
+          req.flash('error_msg', error.message);
           db.Shows.find({date: minDate})
           .then(function(shows) {
             res.render("admin");
@@ -55,22 +56,42 @@ module.exports = (app, basicAuth, db, validator) => {
   // =============================================================
   // add show
   app.post("/show", (req, res) => {
-    var show = req.body;
-    db.Shows
-      .create(show)
-      .then((result) => {
-        req.flash(
-          'success_msg',
-          `Show at ${result.location} successfully created.`
-        );
-        res.redirect('/admin_007');
-      })
-      .catch((error) => {
-      // If an error occurred, send it to the client
-      console.log(error);
-      req.flash('error_msg', error);
+    const show = req.body;
+    const { location, date, link } = show;
+
+    //start validation chain ...
+    if (!date) {
+      req.flash('error_msg', 'No date provided!');
       res.redirect('/admin_007');
-    });
+    } else if (!location) {
+      req.flash('error_msg', 'No location provided!');
+      res.redirect('/admin_007');
+    } else if (!link) {
+      req.flash('error_msg', 'No link provided!');
+      res.redirect('/admin_007');
+    } else if (!validator.isDataURI(date)) {
+      req.flash('error_msg', 'The date provided is not an actual date or is in the wrong format!');
+      res.redirect('/admin_007');
+    } else if (!validator.isURL(link)) {
+      req.flash('error_msg', 'The link provided is not an actual link!');
+      res.redirect('/admin_007');
+    } else {
+        db.Shows
+        .create(show)
+        .then((result) => {
+          req.flash(
+            'success_msg',
+            `Show at ${result.location} successfully created.`
+          );
+          res.redirect('/admin_007');
+        })
+        .catch((error) => {
+        // If an error occurred, send it to the client
+        console.log(error);
+        req.flash('error_msg', error.message);
+        res.redirect('/admin_007');
+      });
+    }
   });
 
   // delete show
@@ -89,7 +110,7 @@ module.exports = (app, basicAuth, db, validator) => {
       .catch((error) => {
       // If an error occurred, send it to the client
       console.log(error);
-      req.flash('error_msg', error);
+      req.flash('error_msg', error.message);
       res.redirect('/admin_007');
     });
   });
@@ -110,7 +131,7 @@ module.exports = (app, basicAuth, db, validator) => {
       .catch((error) => {
       // If an error occurred, send it to the client
       console.log(error);
-      req.flash('error_msg', error);
+      req.flash('error_msg', error.message);
       res.redirect('/admin_007');
     });
   });
