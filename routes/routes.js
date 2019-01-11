@@ -119,20 +119,38 @@ module.exports = (app, basicAuth, db, validator) => {
   app.post("/updateshow", (req, res) => {
     const { _id, location, date, link } = req.body;
 
-    db.Shows
-      .updateOne({_id},{location, date, link})
-      .then((result) => {
-        req.flash(
-          'success_msg',
-          `Show successfully edited.`
-        );
-        res.redirect('/admin_007');
-      })
-      .catch((error) => {
-      // If an error occurred, send it to the client
-      console.log(error);
-      req.flash('error_msg', error.message);
+    //start validation chain ...
+    if (!location) {
+      req.flash('error_msg', 'No location provided while editing show!');
       res.redirect('/admin_007');
-    });
+    } else if (!date) {
+      req.flash('error_msg', 'No date provided while editing show!');
+      res.redirect('/admin_007');
+    } else if (!link) {
+      req.flash('error_msg', 'No link provided while editing show!');
+      res.redirect('/admin_007');
+    } else if (!validator.isISO8601(date)) {
+      req.flash('error_msg', 'The date provided while editing show is not an actual date or is in the wrong format!');
+      res.redirect('/admin_007');
+    } else if (!validator.isURL(link)) {
+      req.flash('error_msg', 'The link provided while editing show is not an actual link!');
+      res.redirect('/admin_007');
+    } else {
+        db.Shows
+        .updateOne({_id},{location, date, link})
+        .then((result) => {
+          req.flash(
+            'success_msg',
+            `Show successfully edited.`
+          );
+          res.redirect('/admin_007');
+        })
+        .catch((error) => {
+        // If an error occurred, send it to the client
+        console.log(error);
+        req.flash('error_msg', error.message);
+        res.redirect('/admin_007');
+      });
+    }
   });
 };
