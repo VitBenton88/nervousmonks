@@ -1,16 +1,18 @@
 <section class="container messages">
-    {{#if success_msg}}
-        {{#each success_msg}}
-        <div class="col-12 message success">
-            <span>{{this}}</span>
-        </div>
-        {{/each}}
-    {{/if}}
-    {{#if error_msg}}
-        {{#each error_msg}}
-        <div class="col-12 message error">
-            <span>{{this}}</span>
-        </div>
-        {{/each}}
-    {{/if}}
+    <div class="col-12 col-lg-8 m-auto">
+        {{#if success_msg}}
+            {{#each success_msg}}
+            <div class="col-12 message success">
+                <span>{{this}}</span>
+            </div>
+            {{/each}}
+        {{/if}}
+        {{#if error_msg}}
+            {{#each error_msg}}
+            <div class="col-12 message error">
+                <span>{{this}}</span>
+            </div>
+            {{/each}}
+        {{/if}}
+    </div>
 </section>
