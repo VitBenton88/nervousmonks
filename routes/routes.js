@@ -60,16 +60,16 @@ module.exports = (app, basicAuth, db, validator) => {
     const { location, date, link } = show;
 
     //start validation chain ...
-    if (!date) {
-      req.flash('error_msg', 'No date provided!');
-      res.redirect('/admin_007');
-    } else if (!location) {
+    if (!location) {
       req.flash('error_msg', 'No location provided!');
+      res.redirect('/admin_007');
+    } else if (!date) {
+      req.flash('error_msg', 'No date provided!');
       res.redirect('/admin_007');
     } else if (!link) {
       req.flash('error_msg', 'No link provided!');
       res.redirect('/admin_007');
-    } else if (!validator.isDataURI(date)) {
+    } else if (!validator.isISO8601(date)) {
       req.flash('error_msg', 'The date provided is not an actual date or is in the wrong format!');
       res.redirect('/admin_007');
     } else if (!validator.isURL(link)) {
