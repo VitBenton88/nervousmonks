@@ -1,17 +1,16 @@
 // Dependencies
 // =============================================================
 const express = require("express");
+const cookieParser = require('cookie-parser')
+const session = require('express-session');
 const exphbs  = require('express-handlebars');
 const bodyParser = require("body-parser");
 const compression = require('compression');
+const flash = require('connect-flash');
 const path = require("path");
 const mongoose = require("mongoose");
 const basicAuth = require('express-basic-auth');
 const dotenv = require('dotenv');
-
-// Check for production
-// =============================================================
-const production = process.env.NODE_ENV == "production" ? true : false;
 
 // Require all models
 // =============================================================
@@ -27,18 +26,42 @@ let PORT = process.env.PORT || 3000;
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+// Sets up Cookies with the Express App
+// =============================================================
+app.use(cookieParser('keyboardCats'));
+
+// Sets up the Express app to use session
+// =============================================================
+app.use(session({
+  secret: 'keyboardCats',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 }
+}))
+
+// Connect Flash and setup global variables to be passed into every view
+// =============================================================
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
+
+
 // Sets up the Express app to handle data parsing
 // =============================================================
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
-app.use(bodyParser.json({
-  type: "application/vnd.api+json"
-}));
+app.use(bodyParser.json({type: "application/vnd.api+json"}));
 
-//Establish if in production
+// Check for production
+// =============================================================
+const production = process.env.NODE_ENV == "production" ? true : false;
+
+// Make appropriate changes if on production
 // =============================================================
 if (production) {
     // compress responses
@@ -48,7 +71,6 @@ if (production) {
 } else {
     //load environment variables
     dotenv.config();
-
     // permit access to public file
     app.use(express.static(path.join(__dirname, '/public')))
 };

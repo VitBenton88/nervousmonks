@@ -1,9 +1,15 @@
 <section class="container admin-form">
     <p>{{#if this.modal}}Update Show{{else}}Add Show{{/if}}</p>
-    <form class="{{#if this.modal}}update{{else}}add{{/if}}">
-        <input type="text" id="show-location" placeholder="Location">
-        <input type="date" id="show-date" placeholder="Date">
-        <input type="url" id="show-link" placeholder="Link">
+    <form method="POST" 
+    {{#if this.modal}}
+        action="/updateshow" class="update" 
+    {{else}}
+        action="/show" class="add" 
+    {{/if}}
+    >
+        <input name="location" type="text" id="show-location" placeholder="Location">
+        <input name="date" type="date" id="show-date" placeholder="Date (mm/dd/yyyy)">
+        <input name="link" type="url" id="show-link" placeholder="Link">
         <button type="submit" class="button submit-show">{{#if this.modal}}Update{{else}}Submit{{/if}}</button>
     </form>
 </section>
