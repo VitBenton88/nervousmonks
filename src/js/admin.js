@@ -28,3 +28,8 @@ $('.toolbar .button.edit').click( function() {
 $('.modal .close').click(() => {
     $('.modal').hide();
 });
+
+//close message
+$('.message .close').click( function() {
+    $(this).closest('.message').remove();
+});

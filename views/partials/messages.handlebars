@@ -2,15 +2,17 @@
     <div class="col-12 col-lg-8 m-auto">
         {{#if success_msg}}
             {{#each success_msg}}
-            <div class="col-12 message success">
+            <div class="col-12 message success d-flex justify-content-between align-items-center">
                 <span>{{this}}</span>
+                <i class="far fa-times-circle close button"></i>
             </div>
             {{/each}}
         {{/if}}
         {{#if error_msg}}
             {{#each error_msg}}
-            <div class="col-12 message error">
+            <div class="col-12 message error d-flex justify-content-between align-items-center">
                 <span>{{this}}</span>
+                <i class="far fa-times-circle close button"></i>
             </div>
             {{/each}}
         {{/if}}

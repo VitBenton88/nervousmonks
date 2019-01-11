@@ -3,23 +3,22 @@ section.messages {
 
   .message {
     padding: .75rem 1.25rem;
-    padding-right: 4rem;
-    text-align: left;
 
     &.success {
       background: $successMsgBkgColor;
       border: 1px solid $successMsgBorderColor;
 
-        span {
+        span, i {
           color: $successMsgFontColor;
         }
 
     }
+
     &.error {
       background: $errorMsgBkgColor;
       border: 1px solid $errorMsgBorderColor;
 
-        span {
+        span, i {
           color: $errorMsgFontColor;
         }
     }
