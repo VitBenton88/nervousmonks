@@ -7,9 +7,10 @@
         action="/show" class="add" 
     {{/if}}
     >
-        <input name="location" type="text" id="show-location" placeholder="Location">
-        <input name="date" type="date" id="show-date" placeholder="Date (mm/dd/yyyy)">
-        <input name="link" type="url" id="show-link" placeholder="Link">
+        {{#if this.modal}}<input name="_id" type="hidden">{{/if}}
+        <input name="location" type="text" placeholder="Location">
+        <input name="date" type="date" placeholder="Date (mm/dd/yyyy)">
+        <input name="link" type="url" placeholder="Link">
         <button type="submit" class="button submit-show">{{#if this.modal}}Update{{else}}Submit{{/if}}</button>
     </form>
 </section>

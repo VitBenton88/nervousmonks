@@ -14,10 +14,12 @@ $('.toolbar .button.edit').click( function() {
     $('#edit-modal .modal-content .date').html(currentShow.date);
     $('#edit-modal .modal-content .link').html(currentShow.link);
 
-    //enter current show's details into appropriate inputs
-    $('#edit-modal .modal-content #show-location').val(currentShow.location);
-    $('#edit-modal .modal-content #show-date').val(new Date(currentShow.date).toISOString().split('T')[0]);
-    $('#edit-modal .modal-content #show-link').val(currentShow.link);
+    //enter current show's details into appropriate inputs' values and placeholders
+    $('#edit-modal .modal-content input[name=_id]').val(currentShow.id);
+    $('#edit-modal .modal-content input[name=location]').attr("placeholder", currentShow.location);
+    $('#edit-modal .modal-content input[name=date]').val(new Date(currentShow.date).toISOString().split('T')[0]);
+    $('#edit-modal .modal-content input[name=date]').attr("placeholder",new Date(currentShow.date).toISOString().split('T')[0]);
+    $('#edit-modal .modal-content input[name=link]').attr("placeholder", currentShow.link);
 
     $('#edit-modal').show();
 });

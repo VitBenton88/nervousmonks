@@ -96,8 +96,7 @@ module.exports = (app, basicAuth, db) => {
 
   // update show
   app.post("/updateshow", (req, res) => {
-    const _id = req.body.id;
-    const { location, date, link } = req.body;
+    const { _id, location, date, link } = req.body;
 
     db.Shows
       .updateOne({_id},{location, date, link})
