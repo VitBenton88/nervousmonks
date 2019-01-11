@@ -2,22 +2,27 @@
 // =============================================================
 const helperFunctions = require("../utils/HelperFunctions");
 
+// Global variables
+// =============================================================
+
+const minDate = { "$gte": 946684800000 };
+
 // Routes
 // =============================================================
-module.exports = function(app, basicAuth, db) {
+module.exports = (app, basicAuth, db) => {
     // GET
     // =============================================================
     // admin
     app.get("/admin_007", basicAuth({users: { 'admin': process.env.ADMIN_PASS }, challenge: true}), (req, res) => {
-      db.Shows.find({date: { "$gte": 946684800000 }})
+      db.Shows.find({date: minDate})
         .then(function(shows) {
           const showsArr = helperFunctions.showArrFormatter(shows, true);
-          res.render("admin", {showsArr, messages: req.flash()});
+          res.render("admin", {showsArr});
         })
       .catch((error) => {
           // If an error occurred, send it to the client
           console.log(error);
-          db.Shows.find({date: { "$gte": 946684800000 }})
+          db.Shows.find({date: minDate})
           .then(function(shows) {
             res.render("admin");
           });
@@ -75,12 +80,17 @@ module.exports = function(app, basicAuth, db) {
     db.Shows
       .deleteOne({_id})
       .then((result) => {
+        req.flash(
+          'success_msg',
+          `Show successfully deleted.`
+        );
         res.redirect('/admin_007');
       })
-      .catch((err) => {
+      .catch((error) => {
       // If an error occurred, send it to the client
-      console.log(err);
-      res.send(false);
+      console.log(error);
+      req.flash('error_msg', error);
+      res.redirect('/admin_007');
     });
   });
 
@@ -92,12 +102,17 @@ module.exports = function(app, basicAuth, db) {
     db.Shows
       .updateOne({_id},{location, date, link})
       .then((result) => {
-        res.send(true);
+        req.flash(
+          'success_msg',
+          `Show successfully edited.`
+        );
+        res.redirect('/admin_007');
       })
-      .catch((err) => {
+      .catch((error) => {
       // If an error occurred, send it to the client
-      console.log(err);
-      res.send(false);
+      console.log(error);
+      req.flash('error_msg', error);
+      res.redirect('/admin_007');
     });
   });
 };

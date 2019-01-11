@@ -1,22 +1,3 @@
-//Delete a show
-$('.toolbar .button.delete').click( function() {
-    event.preventDefault();
-
-    const showId = $(this).data('id');
-    const RESTobj = {showId}
-
-    $.post("/deleteshow", RESTobj)
-    .done(function(data) {
-
-        if (data === true) {
-            window.location.reload();
-        } else {
-            alert("There Was An Error Creating Your Show!")
-        };
-
-    });
-});
-
 //Prepare edit a show
 $('.toolbar .button.edit').click( function() {
     event.preventDefault();

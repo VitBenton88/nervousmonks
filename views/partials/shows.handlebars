@@ -1,20 +1,23 @@
 {{#if showsArr}}
-{{#each showsArr}}
-<div class="col-12 col-md-4 show">
-    <hr>
-    <ul class="details">
-        <li>{{this.location}}</li>
-        <li><time datetime="{{this.date}}">{{this.dateToPrint}}</time></li>
-        <li><a href="{{this.link}}" target="_blank"> More Info</a></li>
-    </ul>
-    {{#if this.admin}}
-    <aside class="toolbar">
-        <button type="button" data-id="{{this.id}}" data-location="{{this.location}}" data-date="{{this.date}}" data-link="{{this.link}}" class="button edit">Edit</button>
-        <button type="button" data-id="{{this.id}}" class="button delete">Delete</button>
-    </aside>
-    {{/if}}
-</div>
-{{/each}}
+    {{#each showsArr}}
+        <div class="col-12 col-md-4 show">
+            <hr>
+            <ul class="details">
+                <li>{{this.location}}</li>
+                <li><time datetime="{{this.date}}">{{this.dateToPrint}}</time></li>
+                <li><a href="{{this.link}}" target="_blank"> More Info</a></li>
+            </ul>
+            {{#if this.admin}}
+                <aside class="toolbar">
+                    <button type="button" data-id="{{this.id}}" data-location="{{this.location}}" data-date="{{this.date}}" data-link="{{this.link}}" class="button edit">Edit</button>
+                    <form method="POST" action="/deleteshow">
+                        <input name="showId" type="hidden" value="{{this.id}}">
+                        <button type="submit" class="button delete">Delete</button>
+                    </form>
+                </aside>
+            {{/if}}
+        </div>
+    {{/each}}
 {{else}}
-<p>No Shows Currently Scheduled</p>
+    <p>No Shows Currently Scheduled</p>
 {{/if}}
