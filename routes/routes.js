@@ -9,7 +9,7 @@ const minDate = { "$gte": 946684800000 };
 
 // Routes
 // =============================================================
-module.exports = (app, basicAuth, db) => {
+module.exports = (app, basicAuth, db, validator) => {
     // GET
     // =============================================================
     // admin

@@ -11,6 +11,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const basicAuth = require('express-basic-auth');
 const dotenv = require('dotenv');
+const validator = require('validator');
 
 // Require all models
 // =============================================================
@@ -86,7 +87,7 @@ mongoose.connect(MONGODB_URI, {
 
 // Import Routes
 // =============================================================
-require("./routes/routes.js")(app, basicAuth, db);
+require("./routes/routes.js")(app, basicAuth, db, validator);
 
 // Starts the server to begin listening
 // =============================================================
