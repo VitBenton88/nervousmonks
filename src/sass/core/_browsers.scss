@@ -85,7 +85,22 @@
      * Safari (iOS)
     **/
 
-    .ua-ios.ua-safari {}
+    .ua-ios.ua-safari {
+        #admin {
+            .admin-form {
+                label {
+                    display: block;
+                }
+    
+                input {
+                    &#date {
+                        line-height: 32px;
+                        margin: 10px auto 20px;
+                    }
+                }
+            }
+        }
+    }
 
 /**
  * macOS

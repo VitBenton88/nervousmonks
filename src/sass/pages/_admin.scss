@@ -5,6 +5,10 @@
     .admin-form {
         margin: 50px auto;
 
+        label {
+            display: none;
+        }
+
         input {
             margin: 20px auto;
         }
