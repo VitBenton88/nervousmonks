@@ -1,10 +1,10 @@
 {
-  "name": "template_nodeJS",
+  "name": "Nervous Monks Site",
   "version": "1.0.0",
   "description": "Offical website for the band Nervous Monks",
   "main": "server.js",
   "engines": {
-    "node": "8.9.1"
+    "node": "10.15.0"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
