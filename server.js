@@ -60,7 +60,7 @@ app.use(bodyParser.json({type: "application/vnd.api+json"}));
 
 // Check for production
 // =============================================================
-const production = process.env.NODE_ENV == "production" ? true : false;
+const production = process.env.NODE_ENV == "production";
 
 // Make appropriate changes if on production
 // =============================================================
