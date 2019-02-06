@@ -48,8 +48,8 @@ module.exports = (app, basicAuth, db, validator) => {
     });
 
     //handle sitemap request
-    app.get('/sitemap.xml', (req, res) => {
-        res.send("./public/sitemap.xml");
+    app.get('/sitemap.txt', (req, res) => {
+        res.send("./public/sitemap.txt");
     });
 
   // POST
