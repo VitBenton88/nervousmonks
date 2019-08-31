@@ -69,6 +69,14 @@ if (production) {
     app.use(compression());
     // permit access to public file
     app.use(express.static(path.join(__dirname, '/public'), {maxage: '1y'}));
+    // force https on heroku
+    app.use((req, res, next) => {
+      if (req.header('x-forwarded-proto') !== 'https' && process.env._.indexOf("heroku")) {
+        res.redirect(`https://${req.header('host')}${req.url}`)
+      } else {
+        next();
+      }
+    });
 } else {
     //load environment variables
     dotenv.config();
