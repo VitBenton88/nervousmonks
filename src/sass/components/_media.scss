@@ -1,0 +1,16 @@
+.media {
+    iframe {
+        max-width: 100%;
+    }
+
+    &.youtube {
+        iframe {
+            height: 315px;
+            width: 560px;
+
+            @include max-width($screen-xs-max) {
+                height: 215px;
+            }
+        }
+    }
+}
