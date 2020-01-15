@@ -34,7 +34,7 @@ module.exports = (app, basicAuth, db, validator) => {
     app.get(["/", "*"], (req, res) => {
       const date = new Date();
       const yesterdaysDate = date.setDate(date.getDate() - 1);
-        db.Shows.find({date: { "$gte": yesterdaysDate }})
+        db.Shows.find({date: { "$gte": yesterdaysDate }}).lean()
         .then(function(shows) {
           const showsArr = helperFunctions.showArrFormatter(shows, false);
           res.render("index", {showsArr});
