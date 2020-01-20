@@ -14,7 +14,7 @@ module.exports = (app, basicAuth, db, validator) => {
     // =============================================================
     // admin
     app.get("/admin_007", basicAuth({users: { 'admin': process.env.ADMIN_PASS }, challenge: true}), (req, res) => {
-      db.Shows.find({date: minDate}).lean()
+      db.Shows.find({date: minDate})
         .then(function(shows) {
           const showsArr = helperFunctions.showArrFormatter(shows, true);
           res.render("admin", {showsArr});
